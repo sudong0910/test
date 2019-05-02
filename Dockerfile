@@ -1,9 +1,17 @@
-FROM why2pac/dp4p:0.9.4.13-py34
+FROM python:3.7
+
+WORKDIR /usr/src/app
 
 
-WORKDIR /data/app
+ENV PIP_NO_CACHE_DIR false
+ENV PYTHONPATH /usr/src/app
+
+RUN pip install pipenv
 
 COPY . .
 
-ENV PIP_NO_CACHE_DIR false
-RUN pip install -r requirements.txt
+RUN pipenv install --system --deploy
+
+EXPOSE 8080
+
+CMD /usr/local/bin/dp4p run

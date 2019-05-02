@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+dp-tornado = "==0.9.4.20"
+jsonpickle = "==0.9.3"
+dict2xml = "==1.5"
+sentry-sdk = "*"
+boto3 = "*"
+
+[requires]
+python_version = "3.7"
+
