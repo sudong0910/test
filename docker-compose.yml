@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db_cs:
+    image: mysql:5.7
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    ports:
+      - "33306:3306"
+  web:
+    image: why2pac/dp4p:0.9.4.13-py34
+    ports:
+      - "8000:8000"
+    volumes:
+      - /data/app
+    build:
+      context: ./
+
+  nginx:
+    image: nginx:latest # nginx 서비스에서 사용할 도커 이미지
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on: # 서비스 간의 종속성 표현
+      - web
